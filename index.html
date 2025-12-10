@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -42,30 +42,31 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
         /* Header & Navigation */
         .header {
             background-color: white;
             box-shadow: var(--shadow);
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 1000;
+            left: 0;
             width: 100%;
+            z-index: 1000;
         }
 
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 20px;
+            padding: 0.8rem 15px;
             width: 100%;
         }
 
         .logo h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary);
             white-space: nowrap;
         }
@@ -74,111 +75,133 @@
             color: var(--secondary);
         }
 
-        .logo p {
-            font-size: 0.7rem;
-            color: var(--gray);
+        .nav-links {
             display: none;
         }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1rem;
+        .mobile-menu-btn {
+            display: block;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: var(--dark);
+            background: none;
+            border: none;
         }
 
-        .nav-links a {
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-menu-nav {
+            padding: 1rem 0;
+        }
+
+        .mobile-menu-nav ul {
+            list-style: none;
+        }
+
+        .mobile-menu-nav li {
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .mobile-menu-nav a {
+            display: block;
+            padding: 1rem 1.5rem;
             text-decoration: none;
             color: var(--dark);
             font-weight: 500;
             transition: var(--transition);
-            padding: 0.5rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            white-space: nowrap;
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--primary);
+        .mobile-menu-nav a:hover,
+        .mobile-menu-nav a.active {
             background-color: rgba(37, 99, 235, 0.1);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--dark);
-            background: none;
-            border: none;
-        }
-
-        /* Mobile Menu Overlay */
-        .mobile-menu-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-        }
-
-        .mobile-menu-content {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%;
-            max-width: 300px;
-            height: 100%;
-            background-color: white;
-            padding: 2rem;
-            transition: right 0.3s ease;
-            z-index: 2001;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            overflow-y: auto;
-        }
-
-        .mobile-menu-content.active {
-            right: 0;
-        }
-
-        .mobile-menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .close-mobile-menu {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray);
-        }
-
-        .mobile-nav-links {
-            list-style: none;
-        }
-
-        .mobile-nav-links li {
-            margin-bottom: 1rem;
-        }
-
-        .mobile-nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-size: 1.1rem;
-            display: block;
-            padding: 0.8rem;
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-
-        .mobile-nav-links a:hover {
-            background-color: var(--gray-light);
             color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 60px;
+            padding-bottom: 80px;
+        }
+
+        /* Mobile Sections Container */
+        .mobile-sections {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-sections {
+                display: none;
+            }
+            
+            .mobile-sections {
+                display: block;
+            }
+            
+            .mobile-section {
+                margin-bottom: 0.5rem;
+                background: white;
+                border-radius: 0;
+                border-bottom: 1px solid var(--gray-light);
+            }
+            
+            .mobile-section-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 1.5rem;
+                background: white;
+                cursor: pointer;
+                transition: var(--transition);
+            }
+            
+            .mobile-section-header:hover {
+                background-color: var(--light);
+            }
+            
+            .mobile-section-header h3 {
+                font-size: 1.1rem;
+                color: var(--dark);
+                margin: 0;
+                font-weight: 600;
+            }
+            
+            .mobile-section-header i {
+                transition: transform 0.3s ease;
+                color: var(--primary);
+            }
+            
+            .mobile-section-header.active i {
+                transform: rotate(180deg);
+            }
+            
+            .mobile-section-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease;
+                background: white;
+            }
+            
+            .mobile-section-content.active {
+                max-height: 2000px;
+                padding-bottom: 1.5rem;
+            }
         }
 
         /* Hero Section */
@@ -189,13 +212,12 @@
             background-position: center;
             color: white;
             text-align: center;
-            padding: 4rem 20px;
-            width: 100%;
-            position: relative;
+            padding: 3rem 1rem;
+            margin-bottom: 1rem;
         }
 
         .hero-content h2 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
             font-family: 'Montserrat', sans-serif;
             line-height: 1.3;
@@ -203,16 +225,67 @@
 
         .hero-content p {
             font-size: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             opacity: 0.9;
-            line-height: 1.5;
+        }
+
+        /* Quick Actions (Mobile Only) */
+        .quick-actions {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .quick-actions {
+                display: flex;
+                gap: 0.5rem;
+                padding: 0.5rem;
+                background: white;
+                position: sticky;
+                top: 60px;
+                z-index: 900;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            
+            .quick-action-btn {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 0.7rem 0.5rem;
+                background: var(--light);
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: var(--transition);
+            }
+            
+            .quick-action-btn:hover {
+                background: var(--gray-light);
+            }
+            
+            .quick-action-btn i {
+                font-size: 1.2rem;
+                margin-bottom: 0.3rem;
+                color: var(--primary);
+            }
+            
+            .quick-action-btn span {
+                font-size: 0.8rem;
+                font-weight: 500;
+                color: var(--dark);
+            }
+            
+            .hero {
+                margin-top: 0;
+                border-radius: 0;
+            }
         }
 
         /* Buttons */
         .btn-primary, .btn-secondary, .btn-outline {
             padding: 0.8rem 1.5rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
@@ -257,10 +330,10 @@
         /* Filter Section */
         .filters {
             background-color: white;
-            padding: 1.5rem 0;
+            padding: 1.5rem;
+            margin: 1rem;
+            border-radius: 10px;
             box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-            width: 100%;
         }
 
         .filters h3 {
@@ -270,68 +343,50 @@
         }
 
         .filter-options {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 0.8rem;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
         }
 
         .filter-options select {
-            padding: 0.7rem;
+            padding: 0.8rem;
             border: 1px solid var(--gray-light);
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 0.9rem;
-            min-width: 140px;
-            flex: 1;
-            max-width: 180px;
-        }
-
-        .filter-options button {
-            padding: 0.7rem 1.2rem;
-            min-width: 80px;
-        }
-
-        /* Listings */
-        .section-title {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            color: var(--dark);
-            font-family: 'Montserrat', sans-serif;
-            padding: 0 20px;
-        }
-
-        .listings {
-            padding: 2rem 0;
             width: 100%;
         }
 
+        .filter-buttons {
+            grid-column: span 2;
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .filter-buttons button {
+            flex: 1;
+            padding: 0.8rem;
+        }
+
+        /* Listings */
         .listings-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 3rem;
-            padding: 0 10px;
+            padding: 1rem;
         }
 
-        @media (min-width: 640px) {
+        @media (max-width: 768px) {
             .listings-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .listings-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 2rem;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem 0.5rem;
             }
         }
 
         .listing-card {
             background-color: white;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
@@ -414,7 +469,7 @@
         .listing-condition {
             display: inline-block;
             padding: 0.3rem 0.6rem;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 0.75rem;
             font-weight: 600;
             margin-top: auto;
@@ -444,45 +499,21 @@
         .view-details-btn {
             margin-top: 1rem;
             width: 100%;
-            padding: 0.6rem;
+            padding: 0.8rem;
             font-size: 0.9rem;
         }
 
         /* Form Styles */
-        .add-listing {
-            background-color: white;
-            padding: 3rem 0;
-            width: 100%;
-        }
-
         .listing-form {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: var(--light);
+            background-color: white;
             padding: 1.5rem;
-            border-radius: 8px;
+            margin: 1rem;
+            border-radius: 10px;
             box-shadow: var(--shadow);
         }
 
         .form-group {
             margin-bottom: 1.2rem;
-        }
-
-        .form-row {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        @media (min-width: 640px) {
-            .form-row {
-                flex-direction: row;
-            }
-        }
-
-        .form-row .form-group {
-            flex: 1;
-            min-width: 0;
         }
 
         .form-group label {
@@ -499,7 +530,7 @@
             width: 100%;
             padding: 0.8rem;
             border: 1px solid var(--gray-light);
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 0.95rem;
             transition: var(--transition);
             font-family: 'Poppins', sans-serif;
@@ -524,82 +555,11 @@
             display: flex;
             gap: 1rem;
             margin-top: 2rem;
-            flex-wrap: wrap;
         }
 
         .form-buttons button {
             flex: 1;
-            min-width: 120px;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 3rem 0 1.5rem;
-            width: 100%;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            .footer-content {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        .footer-section h3,
-        .footer-section h4 {
-            margin-bottom: 1rem;
-            color: white;
-            font-size: 1.1rem;
-        }
-
-        .footer-section p {
-            margin-bottom: 0.5rem;
-            opacity: 0.8;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .footer-section i {
-            margin-right: 0.5rem;
-            color: var(--secondary);
-            width: 16px;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section ul li a {
-            color: white;
-            text-decoration: none;
-            opacity: 0.8;
-            transition: var(--transition);
-            font-size: 0.9rem;
-        }
-
-        .footer-section ul li a:hover {
-            opacity: 1;
-            color: var(--secondary);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0.7;
-            font-size: 0.85rem;
+            padding: 0.8rem;
         }
 
         /* Modal */
@@ -611,7 +571,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
-            z-index: 3000;
+            z-index: 2000;
             overflow-y: auto;
             padding: 20px;
         }
@@ -621,7 +581,7 @@
             margin: 0 auto;
             width: 100%;
             max-width: 800px;
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 1.5rem;
             position: relative;
             max-height: 90vh;
@@ -640,22 +600,12 @@
             z-index: 1;
         }
 
-        .close-modal:hover {
-            color: var(--dark);
-        }
-
         .modal-image {
             width: 100%;
-            height: 250px;
+            height: 200px;
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .modal-image {
-                height: 350px;
-            }
         }
 
         /* Success Message */
@@ -667,10 +617,10 @@
             background-color: var(--secondary);
             color: white;
             padding: 1rem;
-            border-radius: 4px;
+            border-radius: 8px;
             box-shadow: var(--shadow);
             display: none;
-            z-index: 4000;
+            z-index: 3000;
             animation: slideIn 0.3s ease;
             text-align: center;
         }
@@ -686,21 +636,78 @@
             }
         }
 
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--gray-light);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s ease-in-out infinite;
-            margin: 2rem auto;
-            display: block;
+        /* Footer (Mobile Bottom Bar) */
+        .mobile-footer {
+            display: none;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @media (max-width: 768px) {
+            .mobile-footer {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: white;
+                box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+                z-index: 1000;
+            }
+            
+            .mobile-footer-btn {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 0.8rem 0.5rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+                transition: var(--transition);
+            }
+            
+            .mobile-footer-btn i {
+                font-size: 1.3rem;
+                margin-bottom: 0.3rem;
+                color: var(--gray);
+            }
+            
+            .mobile-footer-btn span {
+                font-size: 0.75rem;
+                color: var(--gray);
+            }
+            
+            .mobile-footer-btn.active i,
+            .mobile-footer-btn.active span {
+                color: var(--primary);
+            }
+            
+            .desktop-footer {
+                display: none;
+            }
+            
+            .main-content {
+                padding-bottom: 120px;
+            }
+        }
+
+        /* Desktop Footer */
+        .desktop-footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         /* Empty State */
@@ -717,31 +724,40 @@
             color: var(--gray-light);
         }
 
-        .empty-state h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .empty-state p {
-            font-size: 0.95rem;
-        }
-
         /* Utility Classes */
-        .text-center { text-align: center; }
+        .d-none {
+            display: none;
+        }
+
+        .d-block {
+            display: block;
+        }
+
         .mt-1 { margin-top: 0.5rem; }
         .mt-2 { margin-top: 1rem; }
         .mt-3 { margin-top: 1.5rem; }
         .mb-1 { margin-bottom: 0.5rem; }
         .mb-2 { margin-bottom: 1rem; }
         .mb-3 { margin-bottom: 1.5rem; }
-        .d-block { display: block; }
-        .d-none { display: none; }
-        .w-100 { width: 100%; }
+        .text-center { text-align: center; }
+
+        /* Desktop Sections */
+        .desktop-sections section {
+            padding: 2rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+        }
 
         /* Scroll to Top Button */
         .scroll-top {
             position: fixed;
-            bottom: 20px;
+            bottom: 80px;
             right: 20px;
             width: 50px;
             height: 50px;
@@ -762,7 +778,13 @@
             transform: translateY(-2px);
         }
 
-        /* Image Placeholder Fallback */
+        @media (max-width: 768px) {
+            .scroll-top {
+                bottom: 100px;
+            }
+        }
+
+        /* Image Fallback */
         .image-placeholder {
             width: 100%;
             height: 100%;
@@ -795,12 +817,11 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- Header & Navigation -->
+    <!-- Header -->
     <header class="header">
         <nav class="navbar">
             <div class="logo">
                 <h1><i class="fas fa-building"></i> Town<span>Space</span></h1>
-                <p>Find your perfect space in our town</p>
             </div>
             <ul class="nav-links">
                 <li><a href="#home" class="active">Home</a></li>
@@ -814,170 +835,355 @@
         </nav>
     </header>
 
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-    <div class="mobile-menu-content" id="mobileMenuContent">
-        <div class="mobile-menu-header">
-            <h3>Menu</h3>
-            <button class="close-mobile-menu" id="closeMobileMenu">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <ul class="mobile-nav-links">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#listings">Listings</a></li>
-            <li><a href="#add-listing">Add Listing</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-menu-nav">
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#listings">Listings</a></li>
+                <li><a href="#add-listing">Add Listing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h2>Discover Amazing Spaces in Our Town</h2>
-            <p>Find rooms, stores, houses, and commercial spaces for rent</p>
-            <a href="#listings" class="btn-primary">Browse Listings</a>
-        </div>
-    </section>
-
-    <!-- Filter Section -->
-    <section class="filters">
-        <div class="container">
-            <h3>Find Your Perfect Space</h3>
-            <div class="filter-options">
-                <select id="property-type">
-                    <option value="all">All Types</option>
-                    <option value="room">Room</option>
-                    <option value="store">Store</option>
-                    <option value="house">House</option>
-                    <option value="commercial">Commercial Space</option>
-                </select>
-                <select id="price-range">
-                    <option value="all">Any Price</option>
-                    <option value="0-500">Under $500</option>
-                    <option value="500-1000">$500 - $1000</option>
-                    <option value="1000-2000">$1000 - $2000</option>
-                    <option value="2000+">$2000+</option>
-                </select>
-                <select id="condition">
-                    <option value="all">Any Condition</option>
-                    <option value="excellent">Excellent</option>
-                    <option value="good">Good</option>
-                    <option value="fair">Fair</option>
-                    <option value="renovated">Renovated</option>
-                </select>
-                <button id="filter-btn" class="btn-secondary">Filter</button>
-                <button id="reset-btn" class="btn-outline">Reset</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Listings Section -->
-    <section class="listings" id="listings">
-        <div class="container">
-            <h2 class="section-title">Available Spaces</h2>
-            <div class="listings-grid" id="listings-container">
-                <!-- Listings will be loaded here dynamically -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Add Listing Section -->
-    <section class="add-listing" id="add-listing">
-        <div class="container">
-            <h2 class="section-title">Add Your Space for Rent</h2>
-            <form id="listing-form" class="listing-form">
-                <div class="form-group">
-                    <label for="title">Title *</label>
-                    <input type="text" id="title" required placeholder="e.g., Cozy 2-Bedroom House Downtown">
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Desktop Sections (for larger screens) -->
+        <div class="desktop-sections">
+            <!-- Hero -->
+            <section class="hero" id="home">
+                <div class="hero-content">
+                    <h2>Discover Amazing Spaces in Our Town</h2>
+                    <p>Find rooms, stores, houses, and commercial spaces for rent</p>
+                    <a href="#listings" class="btn-primary">Browse Listings</a>
                 </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="type">Property Type *</label>
-                        <select id="type" required>
-                            <option value="">Select Type</option>
+            </section>
+
+            <!-- Filters -->
+            <section class="filters">
+                <div class="container">
+                    <h3>Find Your Perfect Space</h3>
+                    <div class="filter-options">
+                        <select id="property-type">
+                            <option value="all">All Types</option>
                             <option value="room">Room</option>
                             <option value="store">Store</option>
                             <option value="house">House</option>
                             <option value="commercial">Commercial Space</option>
                         </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="price">Monthly Price ($) *</label>
-                        <input type="number" id="price" required placeholder="e.g., 1200" min="0">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="location">Location *</label>
-                    <input type="text" id="location" required placeholder="e.g., 123 Main St, Downtown">
-                </div>
-                
-                <div class="form-group">
-                    <label for="condition-select">Condition *</label>
-                    <select id="condition-select" required>
-                        <option value="">Select Condition</option>
-                        <option value="excellent">Excellent</option>
+                        <select id="price-range">
+                            <option value="all">Any Price</option>
+                            <option value="0-500">Under $500</option>
+                            <option value="500-1000">$500 - $1000</option>
+                            <option value="1000-2000">$1000 - $2000</option>
+                            <option value="2000+">$2000+</option>
+                        </select>
+                        <select id="condition">
+                            <option value="all">Any Condition</option>
+                            <option value="excellent">Excellent</option>
                             <option value="good">Good</option>
-                        <option value="fair">Fair</option>
-                        <option value="renovated">Recently Renovated</option>
-                    </select>
+                            <option value="fair">Fair</option>
+                            <option value="renovated">Renovated</option>
+                        </select>
+                        <div class="filter-buttons">
+                            <button id="filter-btn" class="btn-secondary">Filter</button>
+                            <button id="reset-btn" class="btn-outline">Reset</button>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="description">Description *</label>
-                    <textarea id="description" required rows="4" placeholder="Describe the space, amenities, nearby facilities..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="image-url">Image URL *</label>
-                    <input type="url" id="image-url" required placeholder="https://example.com/your-image.jpg">
-                    <small>You can upload your image to imgur.com or similar services and paste the link here</small>
-                </div>
-                
-                <div class="form-group">
-                    <label for="contact">Contact Info *</label>
-                    <input type="text" id="contact" required placeholder="Phone or Email">
-                </div>
-                
-                <div class="form-buttons">
-                    <button type="submit" class="btn-primary">Add Listing</button>
-                    <button type="reset" class="btn-outline">Clear Form</button>
-                </div>
-            </form>
-        </div>
-    </section>
+            </section>
 
-    <!-- Footer -->
-    <footer class="footer" id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3><i class="fas fa-building"></i> TownSpace</h3>
-                    <p>Connecting people with perfect spaces in our community since 2023.</p>
+            <!-- Listings -->
+            <section class="listings" id="listings">
+                <div class="container">
+                    <h2 class="section-title">Available Spaces</h2>
+                    <div class="listings-grid" id="listings-container">
+                        <!-- Listings will be loaded here dynamically -->
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Contact Us</h4>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Town Center, Our Town</p>
-                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
-                    <p><i class="fas fa-envelope"></i> info@townspace.com</p>
+            </section>
+
+            <!-- Add Listing -->
+            <section class="add-listing" id="add-listing">
+                <div class="container">
+                    <h2 class="section-title">Add Your Space for Rent</h2>
+                    <form id="listing-form" class="listing-form">
+                        <div class="form-group">
+                            <label for="title">Title *</label>
+                            <input type="text" id="title" required placeholder="e.g., Cozy 2-Bedroom House Downtown">
+                        </div>
+                        
+                        <div class="form-row" style="display: flex; gap: 1rem; margin-bottom: 1.2rem;">
+                            <div class="form-group" style="flex: 1;">
+                                <label for="type">Property Type *</label>
+                                <select id="type" required>
+                                    <option value="">Select Type</option>
+                                    <option value="room">Room</option>
+                                    <option value="store">Store</option>
+                                    <option value="house">House</option>
+                                    <option value="commercial">Commercial Space</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" style="flex: 1;">
+                                <label for="price">Monthly Price ($) *</label>
+                                <input type="number" id="price" required placeholder="e.g., 1200" min="0">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="location">Location *</label>
+                            <input type="text" id="location" required placeholder="e.g., 123 Main St, Downtown">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="condition-select">Condition *</label>
+                            <select id="condition-select" required>
+                                <option value="">Select Condition</option>
+                                <option value="excellent">Excellent</option>
+                                <option value="good">Good</option>
+                                <option value="fair">Fair</option>
+                                <option value="renovated">Recently Renovated</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description">Description *</label>
+                            <textarea id="description" required rows="4" placeholder="Describe the space, amenities, nearby facilities..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="image-url">Image URL *</label>
+                            <input type="url" id="image-url" required placeholder="https://example.com/your-image.jpg">
+                            <small>You can upload your image to imgur.com or similar services and paste the link here</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact">Contact Info *</label>
+                            <input type="text" id="contact" required placeholder="Phone or Email">
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="submit" class="btn-primary">Add Listing</button>
+                            <button type="reset" class="btn-outline">Clear Form</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#listings">Browse Listings</a></li>
-                        <li><a href="#add-listing">Add Listing</a></li>
-                    </ul>
+            </section>
+
+            <!-- Contact -->
+            <footer class="desktop-footer" id="contact">
+                <div class="container">
+                    <div class="footer-content">
+                        <div class="footer-section">
+                            <h3><i class="fas fa-building"></i> TownSpace</h3>
+                            <p>Connecting people with perfect spaces in our community since 2023.</p>
+                        </div>
+                        <div class="footer-section">
+                            <h4>Contact Us</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> 123 Town Center, Our Town</p>
+                            <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                            <p><i class="fas fa-envelope"></i> info@townspace.com</p>
+                        </div>
+                        <div class="footer-section">
+                            <h4>Quick Links</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li><a href="#home" style="color: white; text-decoration: none; opacity: 0.8; transition: var(--transition);">Home</a></li>
+                                <li><a href="#listings" style="color: white; text-decoration: none; opacity: 0.8; transition: var(--transition);">Browse Listings</a></li>
+                                <li><a href="#add-listing" style="color: white; text-decoration: none; opacity: 0.8; transition: var(--transition);">Add Listing</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="text-center" style="padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.7; font-size: 0.85rem;">
+                        <p>&copy; 2023 TownSpace Rentals. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Mobile Sections (for smaller screens) -->
+        <div class="mobile-sections">
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <button class="quick-action-btn" data-section="hero">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </button>
+                <button class="quick-action-btn" data-section="listings">
+                    <i class="fas fa-search"></i>
+                    <span>Browse</span>
+                </button>
+                <button class="quick-action-btn" data-section="add-listing">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Add New</span>
+                </button>
+                <button class="quick-action-btn" data-section="filters">
+                    <i class="fas fa-filter"></i>
+                    <span>Filter</span>
+                </button>
+            </div>
+
+            <!-- Hero Section -->
+            <div class="mobile-section" id="mobile-hero">
+                <div class="mobile-section-header" data-target="hero-content">
+                    <h3><i class="fas fa-home"></i> Welcome</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-section-content" id="hero-content">
+                    <div class="hero">
+                        <div class="hero-content">
+                            <h2>Discover Amazing Spaces</h2>
+                            <p>Find rooms, stores, houses, and commercial spaces for rent in our town</p>
+                            <button class="btn-primary" onclick="toggleSection('listings-content')">Browse Listings</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 TownSpace Rentals. All rights reserved.</p>
+
+            <!-- Filters Section -->
+            <div class="mobile-section" id="mobile-filters">
+                <div class="mobile-section-header" data-target="filters-content">
+                    <h3><i class="fas fa-filter"></i> Filter Listings</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-section-content" id="filters-content">
+                    <div class="filters">
+                        <h3>Find Your Perfect Space</h3>
+                        <div class="filter-options">
+                            <select id="mobile-property-type">
+                                <option value="all">All Types</option>
+                                <option value="room">Room</option>
+                                <option value="store">Store</option>
+                                <option value="house">House</option>
+                                <option value="commercial">Commercial Space</option>
+                            </select>
+                            <select id="mobile-price-range">
+                                <option value="all">Any Price</option>
+                                <option value="0-500">Under $500</option>
+                                <option value="500-1000">$500 - $1000</option>
+                                <option value="1000-2000">$1000 - $2000</option>
+                                <option value="2000+">$2000+</option>
+                            </select>
+                            <select id="mobile-condition">
+                                <option value="all">Any Condition</option>
+                                <option value="excellent">Excellent</option>
+                                <option value="good">Good</option>
+                                <option value="fair">Fair</option>
+                                <option value="renovated">Renovated</option>
+                            </select>
+                            <div class="filter-buttons">
+                                <button id="mobile-filter-btn" class="btn-secondary">Apply Filters</button>
+                                <button id="mobile-reset-btn" class="btn-outline">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listings Section -->
+            <div class="mobile-section" id="mobile-listings">
+                <div class="mobile-section-header active" data-target="listings-content">
+                    <h3><i class="fas fa-building"></i> Available Spaces</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-section-content active" id="listings-content">
+                    <div class="listings-grid" id="mobile-listings-container">
+                        <!-- Mobile listings will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Listing Section -->
+            <div class="mobile-section" id="mobile-add-listing">
+                <div class="mobile-section-header" data-target="add-listing-content">
+                    <h3><i class="fas fa-plus-circle"></i> Add Your Space</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-section-content" id="add-listing-content">
+                    <form id="mobile-listing-form" class="listing-form">
+                        <div class="form-group">
+                            <label for="mobile-title">Title *</label>
+                            <input type="text" id="mobile-title" required placeholder="e.g., Cozy 2-Bedroom House Downtown">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mobile-type">Property Type *</label>
+                            <select id="mobile-type" required>
+                                <option value="">Select Type</option>
+                                <option value="room">Room</option>
+                                <option value="store">Store</option>
+                                <option value="house">House</option>
+                                <option value="commercial">Commercial Space</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mobile-price">Monthly Price ($) *</label>
+                            <input type="number" id="mobile-price" required placeholder="e.g., 1200" min="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mobile-location">Location *</label>
+                            <input type="text" id="mobile-location" required placeholder="e.g., 123 Main St, Downtown">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mobile-condition-select">Condition *</label>
+                            <select id="mobile-condition-select" required>
+                                <option value="">Select Condition</option>
+                                <option value="excellent">Excellent</option>
+                                <option value="good">Good</option>
+                                <option value="fair">Fair</option>
+                                <option value="renovated">Recently Renovated</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mobile-description">Description *</label>
+                            <textarea id="mobile-description" required rows="4" placeholder="Describe the space, amenities, nearby facilities..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mobile-image-url">Image URL *</label>
+                            <input type="url" id="mobile-image-url" required placeholder="https://example.com/your-image.jpg">
+                            <small>Upload to imgur.com and paste the link here</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mobile-contact">Contact Info *</label>
+                            <input type="text" id="mobile-contact" required placeholder="Phone or Email">
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="submit" class="btn-primary">Add Listing</button>
+                            <button type="reset" class="btn-outline">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
+
+    <!-- Mobile Footer -->
+    <div class="mobile-footer">
+        <button class="mobile-footer-btn active" data-section="hero-content">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </button>
+        <button class="mobile-footer-btn" data-section="listings-content">
+            <i class="fas fa-building"></i>
+            <span>Listings</span>
+        </button>
+        <button class="mobile-footer-btn" data-section="add-listing-content">
+            <i class="fas fa-plus"></i>
+            <span>Add New</span>
+        </button>
+        <button class="mobile-footer-btn" data-section="filters-content">
+            <i class="fas fa-filter"></i>
+            <span>Filters</span>
+        </button>
+    </div>
 
     <!-- Modal for Listing Details -->
     <div class="modal" id="listing-modal">
@@ -999,42 +1205,23 @@
         document.addEventListener('DOMContentLoaded', function() {
             // DOM Elements
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-            const mobileMenuContent = document.getElementById('mobileMenuContent');
-            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
             const scrollTopBtn = document.getElementById('scrollTopBtn');
-            const listingsContainer = document.getElementById('listings-container');
-            const listingForm = document.getElementById('listing-form');
-            const modal = document.getElementById('listing-modal');
-            const closeModal = document.querySelector('.close-modal');
-            const modalContent = document.getElementById('modal-content');
-            const filterBtn = document.getElementById('filter-btn');
-            const resetBtn = document.getElementById('reset-btn');
             const successMessage = document.getElementById('success-message');
-
-            // Mobile Menu Toggle
-            function openMobileMenu() {
-                mobileMenuOverlay.style.display = 'block';
-                mobileMenuContent.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeMobileMenuFunc() {
-                mobileMenuOverlay.style.display = 'none';
-                mobileMenuContent.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-
-            mobileMenuBtn.addEventListener('click', openMobileMenu);
-            closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
-            mobileMenuOverlay.addEventListener('click', closeMobileMenuFunc);
-
-            // Close mobile menu when clicking on links
-            document.querySelectorAll('.mobile-nav-links a').forEach(link => {
-                link.addEventListener('click', closeMobileMenuFunc);
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
             });
 
-            // Scroll to Top Button
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                    mobileMenu.classList.remove('active');
+                }
+            });
+
+            // Scroll to top button
             window.addEventListener('scroll', function() {
                 if (window.pageYOffset > 300) {
                     scrollTopBtn.style.display = 'block';
@@ -1050,22 +1237,88 @@
                 });
             });
 
-            // Smooth Scrolling for Navigation Links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
+            // Toggle mobile sections
+            function toggleSection(sectionId) {
+                const section = document.getElementById(sectionId);
+                const header = document.querySelector(`[data-target="${sectionId}"]`);
+                
+                if (section.classList.contains('active')) {
+                    section.classList.remove('active');
+                    header.classList.remove('active');
+                    header.querySelector('i').style.transform = 'rotate(0deg)';
+                } else {
+                    // Close all other sections
+                    document.querySelectorAll('.mobile-section-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.querySelectorAll('.mobile-section-header').forEach(header => {
+                        header.classList.remove('active');
+                        header.querySelector('i').style.transform = 'rotate(0deg)';
+                    });
                     
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
+                    // Open selected section
+                    section.classList.add('active');
+                    header.classList.add('active');
+                    header.querySelector('i').style.transform = 'rotate(180deg)';
+                    
+                    // Scroll to section
+                    setTimeout(() => {
+                        header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 300);
+                }
+            }
+
+            // Add click handlers to section headers
+            document.querySelectorAll('.mobile-section-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    toggleSection(targetId);
+                    
+                    // Update footer buttons
+                    const sectionType = targetId.replace('-content', '');
+                    document.querySelectorAll('.mobile-footer-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                        if (btn.getAttribute('data-section') === targetId) {
+                            btn.classList.add('active');
+                        }
+                    });
                 });
             });
+
+            // Quick action buttons
+            document.querySelectorAll('.quick-action-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section') + '-content';
+                    toggleSection(sectionId);
+                    
+                    // Update footer buttons
+                    document.querySelectorAll('.mobile-footer-btn')..forEach(footerBtn => {
+                        footerBtn.classList.remove('active');
+                        if (footerBtn.getAttribute('data-section') === sectionId) {
+                            footerBtn.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+            // Footer buttons
+            document.querySelectorAll('.mobile-footer-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    
+                    // Update active state
+                    document.querySelectorAll('.mobile-footer-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Open the section
+                    toggleSection(sectionId);
+                });
+            });
+
+            // Make toggleSection available globally
+            window.toggleSection = toggleSection;
 
             // Sample Data
             const sampleListings = [
@@ -1104,54 +1357,21 @@
                     imageUrl: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                     contact: "sarah@email.com",
                     date: "2023-10-05"
-                },
-                {
-                    id: 4,
-                    title: "Office Space for Rent",
-                    type: "commercial",
-                    price: 1500,
-                    location: "789 Business Blvd",
-                    condition: "renovated",
-                    description: "Fully furnished office space with conference room, kitchenette, and high-speed internet included. Ideal for startups or small businesses.",
-                    imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    contact: "office@company.com",
-                    date: "2023-09-28"
-                },
-                {
-                    id: 5,
-                    title: "Cozy Studio Room",
-                    type: "room",
-                    price: 550,
-                    location: "321 Elm Street",
-                    condition: "fair",
-                    description: "Affordable studio room with private bathroom. Utilities included. Great for students or young professionals. Close to university and downtown.",
-                    imageUrl: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    contact: "(555) 987-6543",
-                    date: "2023-09-20"
-                },
-                {
-                    id: 6,
-                    title: "Restaurant Space",
-                    type: "commercial",
-                    price: 3200,
-                    location: "555 Food Court",
-                    condition: "excellent",
-                    description: "Fully equipped restaurant space with commercial kitchen, seating for 50, and outdoor patio. Perfect for established restaurant looking to expand.",
-                    imageUrl: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    contact: "restaurant@email.com",
-                    date: "2023-09-15"
                 }
             ];
 
-            // Initialize listings from localStorage or sample data
+            // Initialize listings
             let listings = JSON.parse(localStorage.getItem('townspace-listings')) || sampleListings;
 
-            // Display listings
-            function displayListings(listingsToShow = listings) {
-                listingsContainer.innerHTML = '';
+            // Display listings function
+            function displayListings(listingsToShow = listings, containerId = 'listings-container') {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                
+                container.innerHTML = '';
                 
                 if (listingsToShow.length === 0) {
-                    listingsContainer.innerHTML = `
+                    container.innerHTML = `
                         <div class="empty-state">
                             <i class="fas fa-home"></i>
                             <h3>No listings found</h3>
@@ -1182,7 +1402,7 @@
                             </button>
                         </div>
                     `;
-                    listingsContainer.appendChild(listingCard);
+                    container.appendChild(listingCard);
                 });
             }
 
@@ -1211,6 +1431,9 @@
             window.viewListing = function(id) {
                 const listing = listings.find(l => l.id === id);
                 if (!listing) return;
+                
+                const modal = document.getElementById('listing-modal');
+                const modalContent = document.getElementById('modal-content');
                 
                 modalContent.innerHTML = `
                     <img src="${listing.imageUrl}" alt="${listing.title}" class="modal-image"
@@ -1252,40 +1475,64 @@
             window.copyContact = function(contact) {
                 navigator.clipboard.writeText(contact).then(() => {
                     alert('Contact information copied to clipboard!');
-                }).catch(err => {
-                    console.error('Failed to copy: ', err);
                 });
             };
 
             // Close modal
-            closeModal.addEventListener('click', function() {
-                modal.style.display = 'none';
+            document.querySelector('.close-modal').addEventListener('click', function() {
+                document.getElementById('listing-modal').style.display = 'none';
                 document.body.style.overflow = 'auto';
             });
 
             // Close modal when clicking outside
-            modal.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
+            document.getElementById('listing-modal').addEventListener('click', function(event) {
+                if (event.target === this) {
+                    this.style.display = 'none';
                     document.body.style.overflow = 'auto';
                 }
             });
 
-            // Filter listings
-            filterBtn.addEventListener('click', function() {
-                const typeFilter = document.getElementById('property-type').value;
-                const priceFilter = document.getElementById('price-range').value;
-                const conditionFilter = document.getElementById('condition').value;
+            // Desktop filter functionality
+            const desktopFilterBtn = document.getElementById('filter-btn');
+            const desktopResetBtn = document.getElementById('reset-btn');
+            
+            if (desktopFilterBtn) {
+                desktopFilterBtn.addEventListener('click', filterListings);
+                desktopResetBtn.addEventListener('click', resetFilters);
+            }
+
+            // Mobile filter functionality
+            const mobileFilterBtn = document.getElementById('mobile-filter-btn');
+            const mobileResetBtn = document.getElementById('mobile-reset-btn');
+            
+            if (mobileFilterBtn) {
+                mobileFilterBtn.addEventListener('click', filterListings);
+                mobileResetBtn.addEventListener('click', resetFilters);
+            }
+
+            // Filter function
+            function filterListings() {
+                const isMobile = window.innerWidth <= 768;
+                
+                const typeFilter = isMobile 
+                    ? document.getElementById('mobile-property-type')?.value 
+                    : document.getElementById('property-type')?.value;
+                
+                const priceFilter = isMobile 
+                    ? document.getElementById('mobile-price-range')?.value 
+                    : document.getElementById('price-range')?.value;
+                
+                const conditionFilter = isMobile 
+                    ? document.getElementById('mobile-condition')?.value 
+                    : document.getElementById('condition')?.value;
                 
                 let filteredListings = listings;
                 
-                // Filter by type
-                if (typeFilter !== 'all') {
+                if (typeFilter && typeFilter !== 'all') {
                     filteredListings = filteredListings.filter(listing => listing.type === typeFilter);
                 }
                 
-                // Filter by price
-                if (priceFilter !== 'all') {
+                if (priceFilter && priceFilter !== 'all') {
                     filteredListings = filteredListings.filter(listing => {
                         if (priceFilter === '0-500') return listing.price <= 500;
                         if (priceFilter === '500-1000') return listing.price > 500 && listing.price <= 1000;
@@ -1295,40 +1542,85 @@
                     });
                 }
                 
-                // Filter by condition
-                if (conditionFilter !== 'all') {
+                if (conditionFilter && conditionFilter !== 'all') {
                     filteredListings = filteredListings.filter(listing => listing.condition === conditionFilter);
                 }
                 
-                displayListings(filteredListings);
+                // Update both desktop and mobile listings
+                displayListings(filteredListings, 'listings-container');
+                displayListings(filteredListings, 'mobile-listings-container');
                 
-                // Scroll to listings if not visible
-                if (window.innerWidth < 768) {
-                    document.getElementById('listings').scrollIntoView({ behavior: 'smooth' });
+                if (isMobile) {
+                    toggleSection('listings-content');
                 }
-            });
+            }
 
             // Reset filters
-            resetBtn.addEventListener('click', function() {
-                document.getElementById('property-type').value = 'all';
-                document.getElementById('price-range').value = 'all';
-                document.getElementById('condition').value = 'all';
-                displayListings(listings);
-            });
+            function resetFilters() {
+                const isMobile = window.innerWidth <= 768;
+                
+                if (isMobile) {
+                    document.getElementById('mobile-property-type').value = 'all';
+                    document.getElementById('mobile-price-range').value = 'all';
+                    document.getElementById('mobile-condition').value = 'all';
+                } else {
+                    document.getElementById('property-type').value = 'all';
+                    document.getElementById('price-range').value = 'all';
+                    document.getElementById('condition').value = 'all';
+                }
+                
+                displayListings(listings, 'listings-container');
+                displayListings(listings, 'mobile-listings-container');
+            }
 
-            // Add new listing
-            listingForm.addEventListener('submit', function(e) {
+            // Form submission
+            const desktopForm = document.getElementById('listing-form');
+            const mobileForm = document.getElementById('mobile-listing-form');
+            
+            if (desktopForm) {
+                desktopForm.addEventListener('submit', handleFormSubmit);
+            }
+            
+            if (mobileForm) {
+                mobileForm.addEventListener('submit', handleFormSubmit);
+            }
+
+            function handleFormSubmit(e) {
                 e.preventDefault();
                 
-                // Basic validation
-                const title = document.getElementById('title').value.trim();
-                const type = document.getElementById('type').value;
-                const price = parseInt(document.getElementById('price').value);
-                const location = document.getElementById('location').value.trim();
-                const condition = document.getElementById('condition-select').value;
-                const description = document.getElementById('description').value.trim();
-                const imageUrl = document.getElementById('image-url').value.trim();
-                const contact = document.getElementById('contact').value.trim();
+                const isMobile = e.target.id === 'mobile-listing-form';
+                
+                const title = isMobile 
+                    ? document.getElementById('mobile-title').value.trim()
+                    : document.getElementById('title').value.trim();
+                
+                const type = isMobile 
+                    ? document.getElementById('mobile-type').value
+                    : document.getElementById('type').value;
+                
+                const price = isMobile 
+                    ? parseInt(document.getElementById('mobile-price').value)
+                    : parseInt(document.getElementById('price').value);
+                
+                const location = isMobile 
+                    ? document.getElementById('mobile-location').value.trim()
+                    : document.getElementById('location').value.trim();
+                
+                const condition = isMobile 
+                    ? document.getElementById('mobile-condition-select').value
+                    : document.getElementById('condition-select').value;
+                
+                const description = isMobile 
+                    ? document.getElementById('mobile-description').value.trim()
+                    : document.getElementById('description').value.trim();
+                
+                const imageUrl = isMobile 
+                    ? document.getElementById('mobile-image-url').value.trim()
+                    : document.getElementById('image-url').value.trim();
+                
+                const contact = isMobile 
+                    ? document.getElementById('mobile-contact').value.trim()
+                    : document.getElementById('contact').value.trim();
                 
                 if (!title || !type || !price || !location || !condition || !description || !imageUrl || !contact) {
                     alert('Please fill in all required fields');
@@ -1348,14 +1640,12 @@
                     date: new Date().toISOString().split('T')[0]
                 };
                 
-                // Add to listings array at the beginning
+                // Add to listings
                 listings.unshift(newListing);
-                
-                // Save to localStorage
                 localStorage.setItem('townspace-listings', JSON.stringify(listings));
                 
                 // Reset form
-                listingForm.reset();
+                e.target.reset();
                 
                 // Show success message
                 successMessage.style.display = 'block';
@@ -1363,65 +1653,27 @@
                     successMessage.style.display = 'none';
                 }, 3000);
                 
-                // Refresh listings display
-                displayListings();
+                // Update listings display
+                displayListings(listings, 'listings-container');
+                displayListings(listings, 'mobile-listings-container');
                 
-                // Scroll to listings
-                setTimeout(() => {
-                    document.getElementById('listings').scrollIntoView({ behavior: 'smooth' });
-                }, 500);
-            });
-
-            // Form reset
-            listingForm.addEventListener('reset', function() {
-                // Optional: Add any reset logic here
-            });
-
-            // Set active navigation link on scroll
-            function setActiveNavLink() {
-                const sections = document.querySelectorAll('section[id]');
-                const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav-links a');
-                
-                let current = '';
-                const scrollPosition = window.scrollY + 100;
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
-                });
+                // On mobile, switch to listings view
+                if (isMobile) {
+                    setTimeout(() => {
+                        toggleSection('listings-content');
+                        document.querySelectorAll('.mobile-footer-btn').forEach(btn => {
+                            btn.classList.remove('active');
+                            if (btn.getAttribute('data-section') === 'listings-content') {
+                                btn.classList.add('active');
+                            }
+                        });
+                    }, 500);
+                }
             }
 
-            window.addEventListener('scroll', setActiveNavLink);
-
-            // Initialize
-            displayListings();
-            setActiveNavLink(); // Set initial active state
-
-            // Prevent form submission on Enter key in non-submit inputs
-            document.querySelectorAll('input:not([type="submit"]), textarea').forEach(input => {
-                input.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter' && !this.classList.contains('submit-btn')) {
-                        e.preventDefault();
-                    }
-                });
-            });
-
-            // Image loading error handler
-            document.addEventListener('error', function(e) {
-                if (e.target.tagName === 'IMG' && e.target.classList.contains('listing-image')) {
-                    e.target.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f0f0f0"/><text x="50" y="50" font-family="Arial" font-size="14" text-anchor="middle" dy=".3em" fill="%23666">Image</text></svg>';
-                }
-            }, true);
+            // Initialize listings display
+            displayListings(listings, 'listings-container');
+            displayListings(listings, 'mobile-listings-container');
         });
     </script>
 </body>
