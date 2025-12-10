@@ -1,27 +1,29 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dan and Dor </title>
+    <title>TownSpace Rentals | Find Your Perfect Space</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Reset and Base Styles */
+        /* Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         :root {
-            --primary: #FF6B35;
-            --primary-dark: #E55A2B;
-            --secondary: #2C3E50;
-            --light: #F8F9FA;
-            --white: #FFFFFF;
-            --text: #333333;
-            --text-light: #6C757D;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --gray-light: #e5e7eb;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
 
         html {
@@ -29,8 +31,10 @@
         }
 
         body {
-            color: var(--text);
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
             overflow-x: hidden;
         }
 
@@ -41,807 +45,1384 @@
             padding: 0 20px;
         }
 
-        section {
-            padding: 80px 0;
-        }
-
-        h1, h2, h3, h4 {
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-
-        h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--primary);
-        }
-
-        p {
-            margin-bottom: 1.5rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--primary);
-            color: var(--white);
-        }
-
         /* Header & Navigation */
-        header {
+        .header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+            width: 100%;
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .logo p {
+            font-size: 0.7rem;
+            color: var(--gray);
+            display: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+            background: none;
+            border: none;
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
         }
 
-        .header-container {
+        .mobile-menu-content {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100%;
+            background-color: white;
+            padding: 2rem;
+            transition: right 0.3s ease;
+            z-index: 2001;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .mobile-menu-content.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
+            margin-bottom: 2rem;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-img {
-            height: 50px;
-            width: auto;
-            background-color: var(--primary);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            padding: 0 10px;
-        }
-
-        .logo-text {
-            margin-left: 10px;
+        .close-mobile-menu {
+            background: none;
+            border: none;
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--secondary);
+            cursor: pointer;
+            color: var(--gray);
         }
 
-        .nav-menu {
-            display: flex;
+        .mobile-nav-links {
             list-style: none;
         }
 
-        .nav-item {
-            margin-left: 30px;
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
         }
 
-        .nav-link {
+        .mobile-nav-links a {
             text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
+            color: var(--dark);
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.8rem;
+            border-radius: 4px;
+            transition: var(--transition);
         }
 
-        .nav-link:hover {
+        .mobile-nav-links a:hover {
+            background-color: var(--gray-light);
             color: var(--primary);
-        }
-
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover:after {
-            width: 100%;
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: var(--secondary);
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
-            color: var(--white);
-            text-align: center;
-            padding: 180px 0 120px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-
-        .hero-btns {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 2rem;
-        }
-
-        /* About Section */
-        .about {
-            background-color: var(--light);
-        }
-
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-
-        .about-text {
-            flex: 1;
-        }
-
-        .about-image {
-            flex: 1;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Services Section */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background-color: var(--white);
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .service-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        /* Testimonials Section */
-        .testimonials {
-            background-color: var(--light);
-        }
-
-        .testimonials-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .testimonial {
-            background-color: var(--white);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             color: white;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-
-        .author-info h4 {
-            margin-bottom: 5px;
-        }
-
-        .author-info p {
-            margin-bottom: 0;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        /* Contact Section */
-        .contact-container {
-            display: flex;
-            gap: 50px;
-        }
-
-        .contact-info {
-            flex: 1;
-        }
-
-        .contact-details {
-            margin-top: 30px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            margin-right: 15px;
-        }
-
-        .contact-form {
-            flex: 1;
-            background-color: var(--light);
-            padding: 30px;
-            border-radius: 8px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-control {
+            text-align: center;
+            padding: 4rem 20px;
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
-
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--secondary);
-            color: var(--white);
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 40px;
-        }
-
-        .footer-column {
-            flex: 1;
-            margin-right: 30px;
-        }
-
-        .footer-column:last-child {
-            margin-right: 0;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .footer-logo .logo-img {
-            height: 40px;
-        }
-
-        .footer-logo .logo-text {
-            color: var(--white);
-        }
-
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
             position: relative;
         }
 
-        .footer-column h3:after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background-color: var(--primary);
+        .hero-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.3;
         }
 
-        .footer-links {
-            list-style: none;
+        .hero-content p {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.5;
         }
 
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #bbb;
+        /* Buttons */
+        .btn-primary, .btn-secondary, .btn-outline {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
             text-decoration: none;
-            transition: color 0.3s ease;
+            display: inline-block;
+            text-align: center;
+            white-space: nowrap;
         }
 
-        .footer-links a:hover {
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Filter Section */
+        .filters {
+            background-color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .filters h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-options select {
+            padding: 0.7rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            min-width: 140px;
+            flex: 1;
+            max-width: 180px;
+        }
+
+        .filter-options button {
+            padding: 0.7rem 1.2rem;
+            min-width: 80px;
+        }
+
+        /* Listings */
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+            padding: 0 20px;
+        }
+
+        .listings {
+            padding: 2rem 0;
+            width: 100%;
+        }
+
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            padding: 0 10px;
+        }
+
+        @media (min-width: 640px) {
+            .listings-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .listings-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        .listing-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .listing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .listing-image-container {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .listing-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .listing-card:hover .listing-image {
+            transform: scale(1.05);
+        }
+
+        .listing-content {
+            padding: 1.2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .listing-type {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            align-self: flex-start;
+        }
+
+        .listing-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            line-height: 1.3;
+            flex-grow: 1;
+        }
+
+        .listing-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .listing-details {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .listing-details i {
+            margin-right: 0.3rem;
             color: var(--primary);
         }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
+        .listing-condition {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: auto;
+            align-self: flex-start;
         }
 
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
+        .condition-excellent {
+            background-color: #10b981;
+            color: white;
         }
 
-        .social-link:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
+        .condition-good {
+            background-color: #3b82f6;
+            color: white;
         }
 
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #bbb;
+        .condition-fair {
+            background-color: #f59e0b;
+            color: white;
+        }
+
+        .condition-renovated {
+            background-color: #8b5cf6;
+            color: white;
+        }
+
+        .view-details-btn {
+            margin-top: 1rem;
+            width: 100%;
+            padding: 0.6rem;
             font-size: 0.9rem;
         }
 
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .about-content,
-            .contact-container {
-                flex-direction: column;
-            }
-            
-            .about-image,
-            .contact-info,
-            .contact-form {
-                width: 100%;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
+        /* Form Styles */
+        .add-listing {
+            background-color: white;
+            padding: 3rem 0;
+            width: 100%;
+        }
+
+        .listing-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .form-row {
+                flex-direction: row;
             }
         }
 
-        @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                flex-direction: column;
-                background-color: var(--white);
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-                padding: 20px 0;
-            }
+        .form-row .form-group {
+            flex: 1;
+            min-width: 0;
+        }
 
-            .nav-menu.active {
-                left: 0;
-            }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
 
-            .nav-item {
-                margin: 15px 0;
-            }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 4px;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
 
-            .hamburger {
-                display: block;
-            }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
 
-            .hero-btns {
-                flex-direction: column;
-                align-items: center;
-            }
+        .form-group small {
+            display: block;
+            margin-top: 0.3rem;
+            color: var(--gray);
+            font-size: 0.75rem;
+        }
 
+        .form-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .form-buttons button {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            width: 100%;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
             .footer-content {
-                flex-direction: column;
-            }
-
-            .footer-column {
-                margin-right: 0;
-                margin-bottom: 30px;
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
-        @media (max-width: 576px) {
-            section {
-                padding: 60px 0;
-            }
+        .footer-section h3,
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: white;
+            font-size: 1.1rem;
+        }
 
-            h1 {
-                font-size: 2rem;
-            }
+        .footer-section p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
 
-            h2 {
-                font-size: 1.7rem;
-            }
+        .footer-section i {
+            margin-right: 0.5rem;
+            color: var(--secondary);
+            width: 16px;
+        }
 
-            .hero {
-                padding: 150px 0 80px;
-            }
+        .footer-section ul {
+            list-style: none;
+        }
 
-            .hero h1 {
-                font-size: 2rem;
-            }
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
 
-            .service-card {
-                padding: 20px;
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 1;
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.85rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 8px;
+            padding: 1.5rem;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--gray);
+            background: none;
+            border: none;
+            z-index: 1;
+        }
+
+        .close-modal:hover {
+            color: var(--dark);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .modal-image {
+                height: 350px;
             }
+        }
+
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            left: 1rem;
+            background-color: var(--secondary);
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            display: none;
+            z-index: 4000;
+            animation: slideIn 0.3s ease;
+            text-align: center;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--gray-light);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin: 2rem auto;
+            display: block;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--gray);
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gray-light);
+        }
+
+        .empty-state h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            font-size: 0.95rem;
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .d-block { display: block; }
+        .d-none { display: none; }
+        .w-100 { width: 100%; }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .scroll-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Image Placeholder Fallback */
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+
+        /* Fix for iOS Safari */
+        input, select, textarea, button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.7rem center;
+            background-size: 1em;
+            padding-right: 2.5rem;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTopBtn">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <nav class="navbar">
             <div class="logo">
-                <div class="logo-img">DAN</div>
-                <div class="logo-text">DOR</div>
+                <h1><i class="fas fa-building"></i> Town<span>Space</span></h1>
+                <p>Find your perfect space in our town</p>
             </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
-                    <li class="nav-item"><a href="#testimonials" class="nav-link">Testimonials</a></li>
-                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#listings">Listings</a></li>
+                <li><a href="#add-listing">Add Listing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <div class="mobile-menu-content" id="mobileMenuContent">
+        <div class="mobile-menu-header">
+            <h3>Menu</h3>
+            <button class="close-mobile-menu" id="closeMobileMenu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#listings">Listings</a></li>
+            <li><a href="#add-listing">Add Listing</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Discover Amazing Spaces in Our Town</h2>
+            <p>Find rooms, stores, houses, and commercial spaces for rent</p>
+            <a href="#listings" class="btn-primary">Browse Listings</a>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filters">
         <div class="container">
-            <h1>Harness the Power of the Sun</h1>
-            <p>We provide high-quality solar panel solutions for homes and businesses, helping you save money while protecting the environment.</p>
-            <div class="hero-btns">
-                <a href="#contact" class="btn">Get Free Quote</a>
-                <a href="#about" class="btn btn-outline">Learn More</a>
+            <h3>Find Your Perfect Space</h3>
+            <div class="filter-options">
+                <select id="property-type">
+                    <option value="all">All Types</option>
+                    <option value="room">Room</option>
+                    <option value="store">Store</option>
+                    <option value="house">House</option>
+                    <option value="commercial">Commercial Space</option>
+                </select>
+                <select id="price-range">
+                    <option value="all">Any Price</option>
+                    <option value="0-500">Under $500</option>
+                    <option value="500-1000">$500 - $1000</option>
+                    <option value="1000-2000">$1000 - $2000</option>
+                    <option value="2000+">$2000+</option>
+                </select>
+                <select id="condition">
+                    <option value="all">Any Condition</option>
+                    <option value="excellent">Excellent</option>
+                    <option value="good">Good</option>
+                    <option value="fair">Fair</option>
+                    <option value="renovated">Renovated</option>
+                </select>
+                <button id="filter-btn" class="btn-secondary">Filter</button>
+                <button id="reset-btn" class="btn-outline">Reset</button>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
+    <!-- Listings Section -->
+    <section class="listings" id="listings">
         <div class="container">
-            <h2>About Us</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Dan and Dor Solar Company Limited is a leading provider of renewable energy solutions with over 15 years of experience in the industry. Our mission is to make solar energy accessible and affordable for everyone.</p>
-                    <p>We specialize in the design, installation, and maintenance of residential and commercial solar panel systems. Our team of certified professionals ensures that every installation meets the highest standards of quality and efficiency.</p>
-                    <p>By choosing SunPower, you're not just saving on your energy bills - you're investing in a sustainable future for generations to come.</p>
-                    <a href="#contact" class="btn">Contact Us</a>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Solar Panels">
-                </div>
+            <h2 class="section-title">Available Spaces</h2>
+            <div class="listings-grid" id="listings-container">
+                <!-- Listings will be loaded here dynamically -->
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
+    <!-- Add Listing Section -->
+    <section class="add-listing" id="add-listing">
         <div class="container">
-            <h2>Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <h3>Residential Solar</h3>
-                    <p>Custom solar solutions for homeowners looking to reduce energy costs and increase property value.</p>
+            <h2 class="section-title">Add Your Space for Rent</h2>
+            <form id="listing-form" class="listing-form">
+                <div class="form-group">
+                    <label for="title">Title *</label>
+                    <input type="text" id="title" required placeholder="e.g., Cozy 2-Bedroom House Downtown">
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-building"></i>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="type">Property Type *</label>
+                        <select id="type" required>
+                            <option value="">Select Type</option>
+                            <option value="room">Room</option>
+                            <option value="store">Store</option>
+                            <option value="house">House</option>
+                            <option value="commercial">Commercial Space</option>
+                        </select>
                     </div>
-                    <h3>Commercial Solar</h3>
-                    <p>Energy solutions for businesses to lower operational costs and demonstrate environmental commitment.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <h3>Maintenance & Repair</h3>
-                    <p>Comprehensive maintenance services to ensure your solar system operates at peak efficiency.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <h2>What Our Clients Say</h2>
-            <div class="testimonials-container">
-                <div class="testimonial">
-                    <p class="testimonial-text">"Switching to solar with SunPower was the best decision we made. Our energy bills have decreased by 70%, and the installation process was smooth and professional."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JS</div>
-                        <div class="author-info">
-                            <h4>John Smith</h4>
-                            <p>Homeowner, San Diego</p>
-                        </div>
+                    
+                    <div class="form-group">
+                        <label for="price">Monthly Price ($) *</label>
+                        <input type="number" id="price" required placeholder="e.g., 1200" min="0">
                     </div>
                 </div>
-                <div class="testimonial">
-                    <p class="testimonial-text">"As a business owner, reducing operational costs is crucial. SunPower helped us install a commercial solar system that cut our energy expenses significantly while boosting our green credentials."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">MJ</div>
-                        <div class="author-info">
-                            <h4>Maria Johnson</h4>
-                            <p>Business Owner, Los Angeles</p>
-                        </div>
-                    </div>
+                
+                <div class="form-group">
+                    <label for="location">Location *</label>
+                    <input type="text" id="location" required placeholder="e.g., 123 Main St, Downtown">
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Get In Touch</h3>
-                    <p>Ready to make the switch to solar energy? Contact us today for a free consultation and quote.</p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <h4>Our Office</h4>
-                                <p>Bogoso, Same building with Casino links </p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div>
-                                <h4>Phone</h4>
-                                <p>0598565277</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <h4>Email</h4>
-                                <p>info@dandor.com</p>
-                            </div>
-                        </div>
-                    </div>
+                
+                <div class="form-group">
+                    <label for="condition-select">Condition *</label>
+                    <select id="condition-select" required>
+                        <option value="">Select Condition</option>
+                        <option value="excellent">Excellent</option>
+                            <option value="good">Good</option>
+                        <option value="fair">Fair</option>
+                        <option value="renovated">Recently Renovated</option>
+                    </select>
                 </div>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" class="form-control" placeholder="Your Phone">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" placeholder="Your Message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
+                
+                <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea id="description" required rows="4" placeholder="Describe the space, amenities, nearby facilities..."></textarea>
                 </div>
-            </div>
+                
+                <div class="form-group">
+                    <label for="image-url">Image URL *</label>
+                    <input type="url" id="image-url" required placeholder="https://example.com/your-image.jpg">
+                    <small>You can upload your image to imgur.com or similar services and paste the link here</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact">Contact Info *</label>
+                    <input type="text" id="contact" required placeholder="Phone or Email">
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="submit" class="btn-primary">Add Listing</button>
+                    <button type="reset" class="btn-outline">Clear Form</button>
+                </div>
+            </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer" id="contact">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
-                    <div class="footer-logo">
-                        <div class="logo-img">DAN</div>
-                        <div class="logo-text">DOR SOLAR COMPANY LTD</div>
-                    </div>
-                    <p>Leading the way in renewable energy solutions for a sustainable future.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-building"></i> TownSpace</h3>
+                    <p>Connecting people with perfect spaces in our community since 2023.</p>
                 </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Town Center, Our Town</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@townspace.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Residential Solar</a></li>
-                        <li><a href="#">Commercial Solar</a></li>
-                        <li><a href="#">Solar Maintenance</a></li>
-                        <li><a href="#">Energy Storage</a></li>
-                        <li><a href="#">Consultation</a></li>
+                        <li><a href="#listings">Browse Listings</a></li>
+                        <li><a href="#add-listing">Add Listing</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2025 DAN AND DOR SOLAR COMPANY LIMITED. All Rights Reserved.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2023 TownSpace Rentals. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Modal for Listing Details -->
+    <div class="modal" id="listing-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div id="modal-content">
+                <!-- Modal content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="success-message">
+        <p><i class="fas fa-check-circle"></i> Listing added successfully!</p>
+    </div>
+
     <script>
-        // Mobile Navigation Toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
+        // JavaScript Code
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const mobileMenuContent = document.getElementById('mobileMenuContent');
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            const listingsContainer = document.getElementById('listings-container');
+            const listingForm = document.getElementById('listing-form');
+            const modal = document.getElementById('listing-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const modalContent = document.getElementById('modal-content');
+            const filterBtn = document.getElementById('filter-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const successMessage = document.getElementById('success-message');
 
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            hamburger.innerHTML = navMenu.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.padding = '10px 0';
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.padding = '15px 0';
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            // Mobile Menu Toggle
+            function openMobileMenu() {
+                mobileMenuOverlay.style.display = 'block';
+                mobileMenuContent.classList.add('active');
+                document.body.style.overflow = 'hidden';
             }
-        });
 
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            this.reset();
+            function closeMobileMenuFunc() {
+                mobileMenuOverlay.style.display = 'none';
+                mobileMenuContent.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            mobileMenuBtn.addEventListener('click', openMobileMenu);
+            closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
+            mobileMenuOverlay.addEventListener('click', closeMobileMenuFunc);
+
+            // Close mobile menu when clicking on links
+            document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+                link.addEventListener('click', closeMobileMenuFunc);
+            });
+
+            // Scroll to Top Button
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.style.display = 'block';
+                } else {
+                    scrollTopBtn.style.display = 'none';
+                }
+            });
+
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Smooth Scrolling for Navigation Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Sample Data
+            const sampleListings = [
+                {
+                    id: 1,
+                    title: "Modern Downtown Apartment",
+                    type: "room",
+                    price: 850,
+                    location: "123 Main St, Downtown",
+                    condition: "excellent",
+                    description: "Beautiful modern apartment in the heart of downtown. Newly renovated with stainless steel appliances, hardwood floors, and great natural light. Close to restaurants, shops, and public transportation.",
+                    imageUrl: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    contact: "john@email.com",
+                    date: "2023-10-15"
+                },
+                {
+                    id: 2,
+                    title: "Retail Space in Mall",
+                    type: "store",
+                    price: 2200,
+                    location: "Town Center Mall",
+                    condition: "good",
+                    description: "Prime retail location in busy mall. 1200 sq ft with high foot traffic. Perfect for clothing store or boutique. Includes basic fixtures and lighting.",
+                    imageUrl: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    contact: "(555) 123-4567",
+                    date: "2023-10-10"
+                },
+                {
+                    id: 3,
+                    title: "Family House with Garden",
+                    type: "house",
+                    price: 1800,
+                    location: "456 Oak Avenue",
+                    condition: "good",
+                    description: "3-bedroom family house with large backyard, garage, and updated kitchen. Quiet neighborhood near schools and parks. Perfect for families.",
+                    imageUrl: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    contact: "sarah@email.com",
+                    date: "2023-10-05"
+                },
+                {
+                    id: 4,
+                    title: "Office Space for Rent",
+                    type: "commercial",
+                    price: 1500,
+                    location: "789 Business Blvd",
+                    condition: "renovated",
+                    description: "Fully furnished office space with conference room, kitchenette, and high-speed internet included. Ideal for startups or small businesses.",
+                    imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    contact: "office@company.com",
+                    date: "2023-09-28"
+                },
+                {
+                    id: 5,
+                    title: "Cozy Studio Room",
+                    type: "room",
+                    price: 550,
+                    location: "321 Elm Street",
+                    condition: "fair",
+                    description: "Affordable studio room with private bathroom. Utilities included. Great for students or young professionals. Close to university and downtown.",
+                    imageUrl: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    contact: "(555) 987-6543",
+                    date: "2023-09-20"
+                },
+                {
+                    id: 6,
+                    title: "Restaurant Space",
+                    type: "commercial",
+                    price: 3200,
+                    location: "555 Food Court",
+                    condition: "excellent",
+                    description: "Fully equipped restaurant space with commercial kitchen, seating for 50, and outdoor patio. Perfect for established restaurant looking to expand.",
+                    imageUrl: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    contact: "restaurant@email.com",
+                    date: "2023-09-15"
+                }
+            ];
+
+            // Initialize listings from localStorage or sample data
+            let listings = JSON.parse(localStorage.getItem('townspace-listings')) || sampleListings;
+
+            // Display listings
+            function displayListings(listingsToShow = listings) {
+                listingsContainer.innerHTML = '';
+                
+                if (listingsToShow.length === 0) {
+                    listingsContainer.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-home"></i>
+                            <h3>No listings found</h3>
+                            <p>Try adjusting your filters or add a new listing!</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                listingsToShow.forEach(listing => {
+                    const listingCard = document.createElement('div');
+                    listingCard.className = 'listing-card';
+                    listingCard.innerHTML = `
+                        <div class="listing-image-container">
+                            <img src="${listing.imageUrl}" alt="${listing.title}" class="listing-image"
+                                 onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23f0f0f0%22/><text x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22>${listing.type}</text></svg>'">
+                        </div>
+                        <div class="listing-content">
+                            <span class="listing-type">${getTypeLabel(listing.type)}</span>
+                            <h3 class="listing-title">${listing.title}</h3>
+                            <div class="listing-price">$${listing.price.toLocaleString()}/month</div>
+                            <div class="listing-details">
+                                <span><i class="fas fa-map-marker-alt"></i> ${listing.location}</span>
+                            </div>
+                            <span class="listing-condition condition-${listing.condition}">${getConditionLabel(listing.condition)}</span>
+                            <button class="btn-outline view-details-btn" onclick="viewListing(${listing.id})">
+                                View Details
+                            </button>
+                        </div>
+                    `;
+                    listingsContainer.appendChild(listingCard);
+                });
+            }
+
+            // Helper functions
+            function getTypeLabel(type) {
+                const types = {
+                    'room': 'Room',
+                    'store': 'Store',
+                    'house': 'House',
+                    'commercial': 'Commercial Space'
+                };
+                return types[type] || type;
+            }
+
+            function getConditionLabel(condition) {
+                const conditions = {
+                    'excellent': 'Excellent',
+                    'good': 'Good',
+                    'fair': 'Fair',
+                    'renovated': 'Renovated'
+                };
+                return conditions[condition] || condition;
+            }
+
+            // View listing details
+            window.viewListing = function(id) {
+                const listing = listings.find(l => l.id === id);
+                if (!listing) return;
+                
+                modalContent.innerHTML = `
+                    <img src="${listing.imageUrl}" alt="${listing.title}" class="modal-image"
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23f0f0f0%22/><text x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22>${listing.type}</text></svg>'">
+                    <div class="mb-2">
+                        <span class="listing-type">${getTypeLabel(listing.type)}</span>
+                        <span class="listing-condition condition-${listing.condition}" style="margin-left: 0.5rem;">
+                            ${getConditionLabel(listing.condition)}
+                        </span>
+                    </div>
+                    <h2 class="mb-2">${listing.title}</h2>
+                    <div class="listing-price" style="font-size: 2rem; margin-bottom: 1rem;">$${listing.price.toLocaleString()}/month</div>
+                    <div class="listing-details mb-2">
+                        <span><i class="fas fa-map-marker-alt"></i> ${listing.location}</span>
+                        <span><i class="fas fa-calendar"></i> ${new Date(listing.date).toLocaleDateString('en-US', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}</span>
+                    </div>
+                    <div class="mb-3">
+                        <h4 class="mb-1">Description</h4>
+                        <p>${listing.description}</p>
+                    </div>
+                    <div style="background-color: var(--light); padding: 1.5rem; border-radius: 8px;">
+                        <h4 class="mb-1">Contact Information</h4>
+                        <p><i class="fas fa-phone"></i> ${listing.contact}</p>
+                        <button class="btn-primary mt-2" onclick="copyContact('${listing.contact.replace(/'/g, "\\'")}')">
+                            <i class="fas fa-copy"></i> Copy Contact Info
+                        </button>
+                    </div>
+                `;
+                
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            };
+
+            // Copy contact info
+            window.copyContact = function(contact) {
+                navigator.clipboard.writeText(contact).then(() => {
+                    alert('Contact information copied to clipboard!');
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            };
+
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Filter listings
+            filterBtn.addEventListener('click', function() {
+                const typeFilter = document.getElementById('property-type').value;
+                const priceFilter = document.getElementById('price-range').value;
+                const conditionFilter = document.getElementById('condition').value;
+                
+                let filteredListings = listings;
+                
+                // Filter by type
+                if (typeFilter !== 'all') {
+                    filteredListings = filteredListings.filter(listing => listing.type === typeFilter);
+                }
+                
+                // Filter by price
+                if (priceFilter !== 'all') {
+                    filteredListings = filteredListings.filter(listing => {
+                        if (priceFilter === '0-500') return listing.price <= 500;
+                        if (priceFilter === '500-1000') return listing.price > 500 && listing.price <= 1000;
+                        if (priceFilter === '1000-2000') return listing.price > 1000 && listing.price <= 2000;
+                        if (priceFilter === '2000+') return listing.price > 2000;
+                        return true;
+                    });
+                }
+                
+                // Filter by condition
+                if (conditionFilter !== 'all') {
+                    filteredListings = filteredListings.filter(listing => listing.condition === conditionFilter);
+                }
+                
+                displayListings(filteredListings);
+                
+                // Scroll to listings if not visible
+                if (window.innerWidth < 768) {
+                    document.getElementById('listings').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+
+            // Reset filters
+            resetBtn.addEventListener('click', function() {
+                document.getElementById('property-type').value = 'all';
+                document.getElementById('price-range').value = 'all';
+                document.getElementById('condition').value = 'all';
+                displayListings(listings);
+            });
+
+            // Add new listing
+            listingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Basic validation
+                const title = document.getElementById('title').value.trim();
+                const type = document.getElementById('type').value;
+                const price = parseInt(document.getElementById('price').value);
+                const location = document.getElementById('location').value.trim();
+                const condition = document.getElementById('condition-select').value;
+                const description = document.getElementById('description').value.trim();
+                const imageUrl = document.getElementById('image-url').value.trim();
+                const contact = document.getElementById('contact').value.trim();
+                
+                if (!title || !type || !price || !location || !condition || !description || !imageUrl || !contact) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                const newListing = {
+                    id: Date.now(),
+                    title: title,
+                    type: type,
+                    price: price,
+                    location: location,
+                    condition: condition,
+                    description: description,
+                    imageUrl: imageUrl,
+                    contact: contact,
+                    date: new Date().toISOString().split('T')[0]
+                };
+                
+                // Add to listings array at the beginning
+                listings.unshift(newListing);
+                
+                // Save to localStorage
+                localStorage.setItem('townspace-listings', JSON.stringify(listings));
+                
+                // Reset form
+                listingForm.reset();
+                
+                // Show success message
+                successMessage.style.display = 'block';
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+                
+                // Refresh listings display
+                displayListings();
+                
+                // Scroll to listings
+                setTimeout(() => {
+                    document.getElementById('listings').scrollIntoView({ behavior: 'smooth' });
+                }, 500);
+            });
+
+            // Form reset
+            listingForm.addEventListener('reset', function() {
+                // Optional: Add any reset logic here
+            });
+
+            // Set active navigation link on scroll
+            function setActiveNavLink() {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav-links a');
+                
+                let current = '';
+                const scrollPosition = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', setActiveNavLink);
+
+            // Initialize
+            displayListings();
+            setActiveNavLink(); // Set initial active state
+
+            // Prevent form submission on Enter key in non-submit inputs
+            document.querySelectorAll('input:not([type="submit"]), textarea').forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && !this.classList.contains('submit-btn')) {
+                        e.preventDefault();
+                    }
+                });
+            });
+
+            // Image loading error handler
+            document.addEventListener('error', function(e) {
+                if (e.target.tagName === 'IMG' && e.target.classList.contains('listing-image')) {
+                    e.target.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f0f0f0"/><text x="50" y="50" font-family="Arial" font-size="14" text-anchor="middle" dy=".3em" fill="%23666">Image</text></svg>';
+                }
+            }, true);
         });
     </script>
 </body>
-
 </html>
-
-
